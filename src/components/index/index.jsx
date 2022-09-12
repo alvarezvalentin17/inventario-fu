@@ -4,8 +4,6 @@ import { useState, useEffect } from "react";
 import db from "../../services/firestore";
 import Header from "../header/Header";
 import Table from "../table/table";
-import Modal from "../../common/modal/modal";
-import styled from 'styled-components'
 import './index.css'
 
 function Index() {
@@ -16,8 +14,7 @@ function Index() {
         .then((datos)=>{
             setItems(datos.docs.map((e)=>({id:e.id,...e.data()})))
         })       
-        console.log(items)
-    }, [1])
+    }, [items])
 
 
   return (
