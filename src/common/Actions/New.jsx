@@ -1,8 +1,9 @@
 import React from 'react'
 import { useState } from 'react';
-import Modal from '../Modal/Modal'
 import db from '../../services/firestore';
 import { addDoc, collection } from 'firebase/firestore';
+import Modal from '../modal/modal';
+import { useEffect } from 'react';
 
 function New() {
 
@@ -18,6 +19,22 @@ function New() {
   const [plant, setPlant] = useState()
   const [section, setSection] = useState()
   const [typeofdisk, setTypeOfDisk] = useState()
+
+  const cleanInputs= ()=> {
+    document.getElementById('user').value = '';
+    document.getElementById('name_pc').value = '';
+    document.getElementById('mark').value = '';
+    document.getElementById('model').value = '';
+    document.getElementById('processor').value = '';
+    document.getElementById('memory_ram').value = '';
+    document.getElementById('price').value = '';
+    document.getElementById('so').value = '';
+    document.getElementById('type').value = '';
+    document.getElementById('plant').value = '';
+    document.getElementById('section').value = '';
+    document.getElementById('typeofdisk').value = '';
+    
+}
 
   const saveInputs = () => {
     let user = document.getElementById('user').value;
@@ -64,8 +81,10 @@ function New() {
     });
 
   }
-  
+  useEffect(()=>{
 
+    cleanInputs()
+  },[1])
 
   return (
     <>

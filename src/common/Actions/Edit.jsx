@@ -1,8 +1,8 @@
 import React from 'react'
-import Modal from '../Modal/Modal'
 import { useState } from 'react'
-import { doc, updateDoc } from 'firebase/firestore'
+// import { doc, updateDoc } from 'firebase/firestore'
 import db from '../../services/firestore'
+import Modal from '../modal/modal'
 import Table from '../../components/table/table'
 
 function Edit({items,id, name_pc}) {
@@ -68,25 +68,21 @@ function Edit({items,id, name_pc}) {
   
     const updateData = async () => {
 
-        
-      const docRef = doc(db, "items", id );
-      console.log(docRef.id,name_pc)
-        // await updateDoc(docRef, 
-        //     {
-        //         user: user1,
-        //         name_pc: name_pc1,
-        //         mark: mark1,
-        //         model: model1,
-        //         processor: processor1,
-        //         memory_ram: memory_ram1,
-        //         price: price1,
-        //         so: so1,
-        //         type: type1,
-        //         plant: plant1,
-        //         section:section1,
-        //         typeofdisk: typeofdisk1,
-        //       } )  
-    }
+    //     await updateDoc(doc(db, "items", e.id,{
+    //             user: user1,
+    //             name_pc: name_pc1,
+    //             mark: mark1,
+    //             model: model1,
+    //             processor: processor1,
+    //             memory_ram: memory_ram1,
+    //             price: price1,
+    //             so: so1,
+    //             type: type1,
+    //             plant: plant1,
+    //             section:section1,
+    //             typeofdisk: typeofdisk1,
+    //             }))
+              }
     
 
     return (
