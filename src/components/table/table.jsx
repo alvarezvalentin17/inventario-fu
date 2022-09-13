@@ -6,10 +6,13 @@ import New from '../../common/Actions/New';
 import Edit from '../../common/Actions/Edit';
 import Swal from 'sweetalert2';
 import { useEffect } from 'react';
+import Modal from '../../common/Modal/Modal';
+import { type } from '@testing-library/user-event/dist/type';
 
 
-function Table({items}) {
+function Table({items}) { 
 
+  const [state1, setState] = useState(true)
   const [user1, setUser] = useState()
   const [name_pc1, setName_pc] = useState()
   const [mark1, setMark] = useState()
@@ -22,13 +25,14 @@ function Table({items}) {
   const [plant1, setPlant] = useState()
   const [section1, setSection] = useState()
   const [typeofdisk1, setTypeOfDisk] = useState()
+  
 
   const saveInputs = () => {
     let user = document.getElementById('user1').value;
     let name_pc = document.getElementById('name_pc1').value;
     let mark = document.getElementById('mark1').value;
     let model = document.getElementById('model1').value;
-    let processor = document.getElementById('processor_1').value;
+    let processor = document.getElementById('processor1').value;
     let memory_ram = document.getElementById('memory_ram1').value;
     let price = document.getElementById('price1').value;
     let so = document.getElementById('so1').value;
@@ -52,6 +56,49 @@ function Table({items}) {
 
 }
 
+  const enableInputs = (id)=> {
+    setState(id)
+  }
+
+function loadInputs(user, name_pc,mark,model,processor,memory_ram,price,so,type,plant,section,typeofdisk) {
+
+  document.getElementById('user1').value = user;
+  document.getElementById('name_pc1').value = name_pc;
+  document.getElementById('mark1').value = mark;
+  document.getElementById('model1').value = model;
+  document.getElementById('processor1').value = processor;
+  document.getElementById('memory_ram1').value = memory_ram;
+  document.getElementById('price1').value = price;
+  document.getElementById('so1').value = so;
+  document.getElementById('type1').value = type;
+  document.getElementById('plant1').value = plant;
+  document.getElementById('section1').value = section;
+  document.getElementById('typeofdisk1').value = typeofdisk;
+
+  console.log(user)
+
+}
+
+
+
+  const update = async ()=> {
+    const docRef = doc(db, "items", state1)
+     await updateDoc(docRef,{
+                user: user1,
+                name_pc: name_pc1,
+                mark: mark1,
+                model: model1,
+                processor: processor1,
+                memory_ram: memory_ram1,
+                price: price1,
+                so: so1,
+                type: type1,
+                plant: plant1,
+                section:section1,
+                typeofdisk: typeofdisk1,
+                })
+                console.log('hola')
+  }
 
 
   return (
@@ -77,8 +124,8 @@ function Table({items}) {
                 </tr>
             </thead>
 
-            <tbody>      
               {items.map((e)=>(
+            <tbody>      
                <tr>
                   <td>{e.id}</td>
                   <td>{e.user}</td>
@@ -93,18 +140,52 @@ function Table({items}) {
                   <td>{e.section}</td>
                   <td>{e.typeofdisk}</td>
                   <td>
-                  
-<span onClick={()=> {
+                   
+                        <Modal
+                        icon='edit'
+                        state='#edit'
+                        stateid='edit'
+                        title={`Editar`}
+                        btn_p='Guardar'
+                        btn_s='Cancelar'
+                        classbtn='btn mt-2 '
+                        starFunction={()=>{
+                          loadInputs(e.user,e.name_pc,e.mark,e.model,e.processor,e.memory_ram,e.price,e.so,e.type,e.plant,e.section,e.typeofdisk)
+                          enableInputs(e.id)
+                        }}
+                        success={()=>{
+                          update()
+                           }}
 
-  
-    console.log(e.id)
-  
-}
+                      >
+                      <div className='container'>
+                        <div class="input-group mb-3">
+                          <input onChange={saveInputs} autoComplete='off' id='user1' type="text" class="form-control" placeholder="Usuario" aria-label="Usuario" />
+                          <input onChange={saveInputs} autoComplete='off' id='name_pc1' type="text" class="form-control" placeholder="Nombre PC" aria-label="Nombre PC" />
+                        </div>
+                        <div class="input-group mb-3">
+                          <input onChange={saveInputs} autoComplete='off' id='mark1' type="text" class="form-control" placeholder="Marca" aria-label="Marca" />
+                          <input onChange={saveInputs} autoComplete='off' id='model1' type="text" class="form-control" placeholder="Modelo" aria-label="Modelo" />
+                        </div>
+                        <div class="input-group mb-3">
+                          <input onChange={saveInputs} autoComplete='off' id='processor1' type="text" class="form-control" placeholder="Procesador" aria-label="Procesador" />
+                          <input onChange={saveInputs} autoComplete='off' id='memory_ram1' type="number" class="form-control" placeholder="RAM" aria-label="RAM" />
+                        </div>
+                        <div class="input-group mb-3">
+                          <input onChange={saveInputs} autoComplete='off' id='typeofdisk1' type="text" class="form-control" placeholder="Tipo de Disco" aria-label="Modelo" />
+                          <input onChange={saveInputs} autoComplete='off' id='price1' type="number" class="form-control" placeholder="Precio" aria-label="Precio" />
+                        </div>
+                        <div class="input-group mb-3">
+                          <input onChange={saveInputs} autoComplete='off'id='so1' type="text" class="form-control" placeholder="Sistema Operativo" aria-label="Sistema Operativo" />
+                          <input onChange={saveInputs} autoComplete='off' id='type1' type="text" class="form-control" placeholder="Tipo" aria-label="Tipo" />
+                        </div>
+                        <div class="input-group mb-3">
+                          <input onChange={saveInputs} autoComplete='off' id='plant1' type="text" class="form-control" placeholder="Planta" aria-label="Planta" />
+                          <input onChange={saveInputs} autoComplete='off' id='section1' type="text" class="form-control" placeholder="Sector" aria-label="Sector" />
+                        </div>
+                      </div>
+            </Modal>
 
-
-}className={`material-symbols-outlined btn`} data-bs-toggle="modal" data-bs-target="#exampleModal">
-  edit
-</span>
 
                     <span className='material-symbols-outlined btn' onClick={()=>{
                         Swal.fire({
@@ -133,31 +214,21 @@ function Table({items}) {
                         })
                     }}>delete</span>
                   </td>
-               </tr> 
-              ))}  
-                
-            </tbody>
-        </table>
+                </tr> 
+               </tbody> 
 
+              )
+
+              )}  
+              
+                
+        </table>
+        
     </div>
 
     </>
   )
 }
 
-export default Table
 
-// const LoadInputs = () => {
-//   document.getElementById('user1').value = e.user;
-//   document.getElementById('name_pc1').value = e.name_pc;
-//   document.getElementById('mark1').value = e.mark;
-//   document.getElementById('model1').value = e.model;
-//   document.getElementById('processor_1').value = e.processor;
-//   document.getElementById('memory_ram1').value = e.memory_ram;
-//   document.getElementById('price1').value = e.price;
-//   document.getElementById('so1').value = e.so;
-//   document.getElementById('type1').value = e.type;
-//   document.getElementById('plant1').value = e.plant;
-//   document.getElementById('section1').value = e.section;
-//   document.getElementById('typeofdisk1').value = e.typeofdisk;
-//   }
+export default Table
