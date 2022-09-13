@@ -56,7 +56,7 @@ function Table({items}) {
 
 }
 
-  const enableInputs = (id)=> {
+  const saveId = (id)=> {
     setState(id)
   }
 
@@ -74,8 +74,6 @@ function loadInputs(user, name_pc,mark,model,processor,memory_ram,price,so,type,
   document.getElementById('plant1').value = plant;
   document.getElementById('section1').value = section;
   document.getElementById('typeofdisk1').value = typeofdisk;
-
-  console.log(user)
 
 }
 
@@ -103,12 +101,11 @@ function loadInputs(user, name_pc,mark,model,processor,memory_ram,price,so,type,
 
   return (
     <>
-    <div className=''>
+    <div className='container'>
                   <New />
         <table className="table mt-5">
             <thead>
                 <tr>
-                  <th scope="col">ID</th>
                   <th scope="col">Usuario</th>
                   <th scope="col">Nombre de PC</th>
                   <th scope="col">Modelo</th>
@@ -127,7 +124,6 @@ function loadInputs(user, name_pc,mark,model,processor,memory_ram,price,so,type,
               {items.map((e)=>(
             <tbody>      
                <tr>
-                  <td>{e.id}</td>
                   <td>{e.user}</td>
                   <td>{e.name_pc}</td>
                   <td>{e.mark}</td>
@@ -140,7 +136,6 @@ function loadInputs(user, name_pc,mark,model,processor,memory_ram,price,so,type,
                   <td>{e.section}</td>
                   <td>{e.typeofdisk}</td>
                   <td>
-                   
                         <Modal
                         icon='edit'
                         state='#edit'
@@ -151,7 +146,7 @@ function loadInputs(user, name_pc,mark,model,processor,memory_ram,price,so,type,
                         classbtn='btn mt-2 '
                         starFunction={()=>{
                           loadInputs(e.user,e.name_pc,e.mark,e.model,e.processor,e.memory_ram,e.price,e.so,e.type,e.plant,e.section,e.typeofdisk)
-                          enableInputs(e.id)
+                          saveId(e.id)
                         }}
                         success={()=>{
                           update()
@@ -189,7 +184,7 @@ function loadInputs(user, name_pc,mark,model,processor,memory_ram,price,so,type,
 
                     <span className='material-symbols-outlined btn' onClick={()=>{
                         Swal.fire({
-                          title: `¿Desea borrar ${e.id}?`,
+                          title: `¿Desea borrar ${e.name_pc}?`,
                           icon: 'warning',
                           showCancelButton: true,
                           confirmButtonColor: '#3085d6',
@@ -223,7 +218,7 @@ function loadInputs(user, name_pc,mark,model,processor,memory_ram,price,so,type,
               
                 
         </table>
-        
+
     </div>
 
     </>

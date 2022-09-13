@@ -91,7 +91,7 @@ function New() {
           title={`Nuevo`}
           btn_p='Guardar'
           btn_s='Cancelar'
-          classbtn='btn mt-2 '
+          classbtn='btn mt-2 end'
           success={saveData}
           starFunction={cleanInputs}
         >
