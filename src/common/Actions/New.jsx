@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react';
 import db from '../../services/firestore';
 import { addDoc, collection } from 'firebase/firestore';
-import Modal from '../modal/modal';
+import Modal from '../Modal/Modal';
 import { useEffect } from 'react';
 
 function New() {
@@ -71,8 +71,8 @@ function New() {
       mark: mark,
       processor: processor,
       model: model,
-      memory_ram: memory_ram,
-      price: price,
+      memory_ram: Number(memory_ram),
+      price: Number(price),
       so: so,
       type: type,
       plant: plant,
@@ -81,10 +81,6 @@ function New() {
     });
 
   }
-  useEffect(()=>{
-
-    cleanInputs()
-  },[1])
 
   return (
     <>
@@ -95,8 +91,9 @@ function New() {
           title={`Nuevo`}
           btn_p='Guardar'
           btn_s='Cancelar'
-          classbtn='btn mt-2 end'
+          classbtn='btn mt-2 '
           success={saveData}
+          starFunction={cleanInputs}
         >
                       <div className='container'>
                         <div class="input-group mb-3">
@@ -109,11 +106,11 @@ function New() {
                         </div>
                         <div class="input-group mb-3">
                           <input onChange={saveInputs} autoComplete='off' id='processor' type="text" class="form-control" placeholder="Procesador" aria-label="Procesador" />
-                          <input onChange={saveInputs} autoComplete='off' id='memory_ram' type="text" class="form-control" placeholder="RAM" aria-label="RAM" />
+                          <input onChange={saveInputs} autoComplete='off' id='memory_ram' type="number" class="form-control" placeholder="RAM" aria-label="RAM" />
                         </div>
                         <div class="input-group mb-3">
                           <input onChange={saveInputs} autoComplete='off' id='typeofdisk' type="text" class="form-control" placeholder="Tipo de Disco" aria-label="Modelo" />
-                          <input onChange={saveInputs} autoComplete='off' id='price' type="text" class="form-control" placeholder="Precio" aria-label="Precio" />
+                          <input onChange={saveInputs} autoComplete='off' id='price' type="number" class="form-control" placeholder="Precio" aria-label="Precio" />
                         </div>
                         <div class="input-group mb-3">
                           <input onChange={saveInputs} autoComplete='off'id='so' type="text" class="form-control" placeholder="Sistema Operativo" aria-label="Sistema Operativo" />

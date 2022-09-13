@@ -56,7 +56,7 @@ function Table({items}) {
 
   return (
     <>
-    <div className='container'>
+    <div className=''>
                   <New />
         <table className="table mt-5">
             <thead>
@@ -96,21 +96,8 @@ function Table({items}) {
                   
 <span onClick={()=> {
 
-  const LoadInputs = () => {
-    document.getElementById('user1').value = e.user;
-    document.getElementById('name_pc1').value = e.name_pc;
-    document.getElementById('mark1').value = e.mark;
-    document.getElementById('model1').value = e.model;
-    document.getElementById('processor_1').value = e.processor;
-    document.getElementById('memory_ram1').value = e.memory_ram;
-    document.getElementById('price1').value = e.price;
-    document.getElementById('so1').value = e.so;
-    document.getElementById('type1').value = e.type;
-    document.getElementById('plant1').value = e.plant;
-    document.getElementById('section1').value = e.section;
-    document.getElementById('typeofdisk1').value = e.typeofdisk;
-    }
-  LoadInputs()
+  
+    console.log(e.id)
   
 }
 
@@ -119,68 +106,6 @@ function Table({items}) {
   edit
 </span>
 
-
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Editar</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-      <div className='container'>
-                        <div class="input-group mb-3">
-                          <input onChange={saveInputs} autoComplete='off' id='user1' type="text" class="form-control" placeholder="Usuario" aria-label="Usuario" />
-                          <input onChange={saveInputs} autoComplete='off' id='name_pc1' type="text" class="form-control" placeholder="Nombre PC" aria-label="Nombre PC" />
-                        </div>
-                        <div class="input-group mb-3">
-                          <input onChange={saveInputs} autoComplete='off' id='mark1' type="text" class="form-control" placeholder="Marca" aria-label="Marca" />
-                          <input onChange={saveInputs} autoComplete='off' id='model1' type="text" class="form-control" placeholder="Modelo" aria-label="Modelo" />
-                        </div>
-                        <div class="input-group mb-3">
-                          <input onChange={saveInputs} autoComplete='off' id='processor_1' type="text" class="form-control" placeholder="Procesador" aria-label="Procesador" />
-                          <input onChange={saveInputs} autoComplete='off' id='memory_ram1' type="text" class="form-control" placeholder="RAM" aria-label="RAM" />
-                        </div>
-                        <div class="input-group mb-3">
-                          <input onChange={saveInputs} autoComplete='off' id='typeofdisk1' type="text" class="form-control" placeholder="Tipo de Disco" aria-label="Modelo" />
-                          <input onChange={saveInputs} autoComplete='off' id='price1' type="text" class="form-control" placeholder="Precio" aria-label="Precio" />
-                        </div>
-                        <div class="input-group mb-3">
-                          <input onChange={saveInputs} autoComplete='off'id='so1' type="text" class="form-control" placeholder="Sistema Operativo" aria-label="Sistema Operativo" />
-                          <input onChange={saveInputs} autoComplete='off' id='type1' type="text" class="form-control" placeholder="Tipo" aria-label="Tipo" />
-                        </div>
-                        <div class="input-group mb-3">
-                          <input onChange={saveInputs} autoComplete='off' id='plant1' type="text" class="form-control" placeholder="Planta" aria-label="Planta" />
-                          <input onChange={saveInputs} autoComplete='off' id='section1' type="text" class="form-control" placeholder="Sector" aria-label="Sector" />
-                        </div>
-                      </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        <button onClick={async ()=>{
-          await updateDoc(doc(db, "items", e.id,{
-            user: user1,
-            name_pc: name_pc1,
-            mark: mark1,
-            model: model1,
-            processor: processor1,
-            memory_ram: memory_ram1,
-            price: price1,
-            so: so1,
-            type: type1,
-            plant: plant1,
-            section:section1,
-            typeofdisk: typeofdisk1,
-          }))
-          
-          
-        }} type="button" data-bs-dismiss="modal" aria-label="Close" class="btn btn-primary">Guardar cambios</button>
-      </div>
-    </div>
-  </div>
-</div>
-        <button onClick={()=>console.log(e.id)}>Ace</button>
-       <span onClick={()=>{console.log(e.id)}}>Guardar</span>
                     <span className='material-symbols-outlined btn' onClick={()=>{
                         Swal.fire({
                           title: `¿Desea borrar ${e.id}?`,
@@ -221,3 +146,18 @@ function Table({items}) {
 }
 
 export default Table
+
+// const LoadInputs = () => {
+//   document.getElementById('user1').value = e.user;
+//   document.getElementById('name_pc1').value = e.name_pc;
+//   document.getElementById('mark1').value = e.mark;
+//   document.getElementById('model1').value = e.model;
+//   document.getElementById('processor_1').value = e.processor;
+//   document.getElementById('memory_ram1').value = e.memory_ram;
+//   document.getElementById('price1').value = e.price;
+//   document.getElementById('so1').value = e.so;
+//   document.getElementById('type1').value = e.type;
+//   document.getElementById('plant1').value = e.plant;
+//   document.getElementById('section1').value = e.section;
+//   document.getElementById('typeofdisk1').value = e.typeofdisk;
+//   }

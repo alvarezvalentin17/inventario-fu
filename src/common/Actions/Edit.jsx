@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 // import { doc, updateDoc } from 'firebase/firestore'
 import db from '../../services/firestore'
-import Modal from '../modal/modal'
+import Modal from '../Modal/Modal'
 import Table from '../../components/table/table'
 
 function Edit({items,id, name_pc}) {
