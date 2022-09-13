@@ -1,18 +1,15 @@
 import React, {useState} from 'react';
-import { doc, deleteDoc, updateDoc, collection, setDoc  } from "firebase/firestore";
+import { doc, deleteDoc, updateDoc } from "firebase/firestore";
 import {db} from '../../services/firestore'
 import './table.css';
 import New from '../../common/Actions/New';
-import Edit from '../../common/Actions/Edit';
-import Swal from 'sweetalert2';
-import { useEffect } from 'react';
-import Modal from '../../common/Modal/Modal';
-import { type } from '@testing-library/user-event/dist/type';
+import Swal from 'sweetalert2'
+import Modal from '../../common/modal/Modal';
 
 
 function Table({items}) { 
 
-  const [state1, setState] = useState(true)
+  const [state1, setState] = useState()
   const [user1, setUser] = useState()
   const [name_pc1, setName_pc] = useState()
   const [mark1, setMark] = useState()
@@ -95,7 +92,6 @@ function loadInputs(user, name_pc,mark,model,processor,memory_ram,price,so,type,
                 section:section1,
                 typeofdisk: typeofdisk1,
                 })
-                console.log('hola')
   }
 
 
@@ -108,14 +104,14 @@ function loadInputs(user, name_pc,mark,model,processor,memory_ram,price,so,type,
                 <tr>
                   <th scope="col">Usuario</th>
                   <th scope="col">Nombre de PC</th>
+                  <th scope="col">Marca</th>
                   <th scope="col">Modelo</th>
                   <th scope="col">Procesador</th>
                   <th scope="col">RAM</th>
-                  <th scope="col">Precio</th>
                   <th scope="col">Sistema Operativo</th>
                   <th scope="col">Tipo</th>
                   <th scope="col">Planta</th>
-                  <th scope="col">Sección</th>
+                  <th scope="col">Sector</th>
                   <th scope="col">Disco</th>
                   <th scope="col">Acciones</th>
                 </tr>
@@ -127,9 +123,9 @@ function loadInputs(user, name_pc,mark,model,processor,memory_ram,price,so,type,
                   <td>{e.user}</td>
                   <td>{e.name_pc}</td>
                   <td>{e.mark}</td>
+                  <td>{e.model}</td>
                   <td>{e.processor}</td>
                   <td>{e.memory_ram} GB</td>
-                  <td>U$S {e.price}</td>
                   <td>{e.so}</td>
                   <td>{e.type}</td>
                   <td>{e.plant}</td>

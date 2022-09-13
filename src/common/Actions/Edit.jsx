@@ -2,8 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import { doc, updateDoc } from 'firebase/firestore'
 import db from '../../services/firestore'
-import Modal from '../Modal/Modal'
-import Table from '../../components/table/table'
+import Modal from '../modal/Modal'
 
 function Edit({id,user }) {
   
