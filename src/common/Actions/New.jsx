@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react';
 import db from '../../services/firestore';
 import { addDoc, collection } from 'firebase/firestore';
-import Modal from '../modal/Modal';
+import Modal from '../Modal/Modal';
 import { useEffect } from 'react';
 
 function New() {
