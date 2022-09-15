@@ -1,5 +1,5 @@
-import logo from './logo.svg';
-import Index from './components/index/index'
+
+import Index from './components/index/Index'
 
 function App() {
   return (

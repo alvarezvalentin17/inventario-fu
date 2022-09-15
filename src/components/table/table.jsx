@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { doc, deleteDoc, updateDoc } from "firebase/firestore";
 import {db} from '../../services/firestore'
-import './table.css';
+import './Table.css';
 import New from '../../common/Actions/New';
 import Swal from 'sweetalert2'
 import Modal from '../../common/Modal/Modal';

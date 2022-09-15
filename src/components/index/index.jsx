@@ -3,8 +3,8 @@ import React from "react";
 import { useState, useEffect } from "react";
 import db from "../../services/firestore";
 import Header from "../header/Header";
-import Table from "../table/table";
-import './index.css'
+import Table from "../table/Table";
+import './Index.css'
 
 function Index() {
     const [items, setItems] = useState([])
