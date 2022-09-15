@@ -22,7 +22,15 @@ function Table({items}) {
   const [plant, setPlant] = useState()
   const [section, setSection] = useState()
   const [typeofdisk, setTypeOfDisk] = useState()
-  
+  const [ search, setSearch ] = useState("")
+
+  const i = items;
+
+  const results = !search ? i : i.filter((e)=> e.user.toLowerCase().includes(search.toLocaleLowerCase()))
+
+  const searcher = (e) => {
+    setSearch(e.target.value)   
+  }
 
   const saveInputs = () => {
     let user = document.getElementById('user_edit').value;
@@ -91,8 +99,6 @@ function viewData(user, name_pc,mark,model,processor,memory_ram,price,so,type,pl
 
 }
 
-
-
   const update = async ()=> {
     const docRef = doc(db, "items", code)
      await updateDoc(docRef,{
@@ -116,6 +122,7 @@ function viewData(user, name_pc,mark,model,processor,memory_ram,price,so,type,pl
     <>
     <div className='container'>
                   <New />
+        <input className='container form-control w-50' value={search} onChange={searcher}  type="text" placeholder='Buscar por usuario'/>
         <table className="table mt-5">
             <thead>
                 <tr>
@@ -133,7 +140,7 @@ function viewData(user, name_pc,mark,model,processor,memory_ram,price,so,type,pl
                 </tr>
             </thead>
 
-              {items.map((e)=>(
+              {results.map((e)=>(
             <tbody>      
                <tr>
                   <td>{e.user}</td>
@@ -154,47 +161,32 @@ function viewData(user, name_pc,mark,model,processor,memory_ram,price,so,type,pl
                         title={`Ver datos`}
                         btn_p='OK'
                         btn_s='Cancelar'
-                        classbtn='  '
+                        sizeModal={'modal-lg'}
                         starFunction={()=>{
                           viewData(e.user,e.name_pc,e.mark,e.model,e.processor,e.memory_ram,e.price,e.so,e.type,e.plant,e.section,e.typeofdisk)
                           saveId(e.id)
+                        
                         }}
 
                       >
-                        <div className="container text-center">
-                        <div class="container text-center">
-  <div class="row">
-    <div class="col-6 col-sm-3">Nombre: <p id='user_view' /></div>
-    <div class="col-6 col-sm-3">Nombre PC: <p id='name__view' /></div>
-    <div class="col-6 col-sm-3">Marca: <p id='mark_view' /></div>
-    <div class="col-6 col-sm-3">Modelo: <p id='model_view' /></div>
-    <div class="col-6 col-sm-3">Procesador: <p id='processor_view' /></div>
-    <div class="col-6 col-sm-3">Memoria RAM: <p id='memory_ram_view' /> GB</div>
-    <div class="col-6 col-sm-3">Precio: U$S <p id='price_view' /></div>
-    <div class="col-6 col-sm-3">Sistema Operativo: <p id='so_view' /></div>
-    <div class="col-6 col-sm-3">Tipo: <p id='type_view' /></div>
-    <div class="col-6 col-sm-3">Planta: <p id='plant_view' /></div>
-    <div class="col-6 col-sm-3">Sección: <p id='section_view' /></div>
-    <div class="col-6 col-sm-3">Tipo de Disco: <p id='typeofdisk_view' /></div>
-  </div>
-</div>
-                        </div>
-                      {/* <div className='container'>
-                        
-                          <div><label ><h4>Nombre:</h4></label> <h5 id='user_view'></h5></div>
-                          <label ><h4>Nombre de PC:</h4></label><h5 id='name__view'></h5>
-                          <label ><h4>Marca:</h4></label><h5 id='mark_view'></h5>
-                          <label ><h4>Modelo:</h4></label><h5 id='model_view'></h5>
-                          <label ><h4>Procesador:</h4></label><h5 id='processor_view'></h5>
-                          <label ><h4>Memoria RAM:</h4></label><h5 id='memory_ram_view'></h5>
-                          <label ><h4>Precio:</h4> </label><h5 id='price_view'></h5>
-                          <label ><h4>Sistema Operativo:</h4></label><h5 id='so_view'></h5>
-                          <label ><h4>Tipo:</h4></label><h5 id='type_view'></h5>
-                          <label ><h4>Planta:</h4></label><h5 id='plant_view'></h5>
-                          <label ><h4>Sección:</h4></label><h5 id='section_view'></h5>
-                          <label ><h4>Tipo de Disco:</h4></label><h5 id='typeofdisk_view'></h5>
+                              <div className='container'>
 
-                      </div> */}
+                                  <label className='mt-4 ms-4 fs-4 text-decoration-underline' >Usuario:</label><p id='user_view' className='d-inline-block fs-4 ms-2'></p>
+                                  <label className='mt-4 ms-4 fs-4 text-decoration-underline' >Nombre PC:</label><p id='name__view' className='d-inline-block fs-4 ms-2'></p>
+                                  <label className='mt-4 ms-4 fs-4 text-decoration-underline' >Marca:</label><p id='mark_view' className='d-inline-block fs-4 ms-2'></p>
+                                  <label className='mt-4 ms-4 fs-4 text-decoration-underline' >Modelo:</label><p id='model_view' className='d-inline-block fs-4 ms-2'></p>
+                                  <label className='mt-4 ms-4 fs-4 text-decoration-underline' >Procesador:</label><p id='processor_view' className='d-inline-block fs-4 ms-2'></p>
+                                  <label className='mt-4 ms-4 fs-4 text-decoration-underline' >Memoria RAM(GB):</label><p id='memory_ram_view' className='d-inline-block fs-4 ms-2'></p>
+                                  <label className='mt-4 ms-4 fs-4 text-decoration-underline' >Precio(U$S):</label><p id='price_view' className='d-inline-block fs-4 ms-2'></p>
+                                  <label className='mt-4 ms-4 fs-4 text-decoration-underline' >Tipo:</label><p id='type_view' className='d-inline-block fs-4 ms-2'></p>
+                                  <label className='mt-4 ms-4 fs-4 text-decoration-underline' >Planta:</label><p id='plant_view' className='d-inline-block fs-4 ms-2'></p>
+                                  <label className='mt-4 ms-4 fs-4 text-decoration-underline' >Sector:</label><p id='section_view' className='d-inline-block fs-4 ms-2'></p>
+                                  <label className='mt-4 ms-4 fs-4 text-decoration-underline' >Tipo de Disco:</label><p id='typeofdisk_view' className='d-inline-block fs-4 ms-2'></p>
+                                  <label className='mt-4 ms-4 fs-4 text-decoration-underline' >Sistema Operativo:</label><p id='so_view' className='d-inline-block fs-4 ms-2'></p>
+                              </div>                            
+                             
+                       
+
                         </Modal>
 
                         <Modal

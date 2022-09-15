@@ -1,4 +1,4 @@
-import { collection, doc, getDocs } from "firebase/firestore";
+import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import React from "react";
 import { useState, useEffect } from "react";
 import db from "../../services/firestore";
@@ -8,14 +8,17 @@ import './index.css'
 
 function Index() {
     const [items, setItems] = useState([])
-
+    
+    
     useEffect(() => { 
-       getDocs(collection(db, "items"))
+      const collections = collection(db, "items");
+      const q = query(collections, orderBy('user', 'asc'))  
+      
+       getDocs(q)
         .then((datos)=>{
             setItems(datos.docs.map((e)=>({id:e.id,...e.data()})))
         })       
     }, [items])
-
 
   return (
     <>

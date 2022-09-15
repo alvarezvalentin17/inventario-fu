@@ -10,14 +10,15 @@ function Modal({icon,
                 title,
                 classbtn,
                 success,
-                starFunction
+                starFunction,
+                sizeModal
             }) {
   return (
     <>
         <span onClick={starFunction} className={`material-symbols-outlined btn ${classbtn}`} data-bs-toggle="modal" data-bs-target={state}>{icon}</span>
 
         <div class="modal fade" id={stateid} tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
+            <div class={`modal-dialog ${sizeModal}` }>
                 <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">{title}</h5>
