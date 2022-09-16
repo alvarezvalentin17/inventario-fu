@@ -6,7 +6,6 @@ import New from '../../common/Actions/New';
 import Swal from 'sweetalert2'
 import Modal from '../../common/Modal/Modal';
 
-
 function Table({items}) { 
 
   const [code, setCode] = useState()
@@ -24,10 +23,11 @@ function Table({items}) {
   const [typeofdisk, setTypeOfDisk] = useState()
   const [ search, setSearch ] = useState("")
 
+
   const i = items;
 
   const results = !search ? i : i.filter((e)=> e.user.toLowerCase().includes(search.toLocaleLowerCase()))
-
+  
   const searcher = (e) => {
     setSearch(e.target.value)   
   }
@@ -120,8 +120,8 @@ function viewData(user, name_pc,mark,model,processor,memory_ram,price,so,type,pl
 
   return (
     <>
-    <div className='container'>
-                  <New />
+    <div className='container'>      
+        <New />
         <input className='container form-control w-50' value={search} onChange={searcher}  type="text" placeholder='Buscar por usuario'/>
         <table className="table mt-5">
             <thead>
@@ -141,7 +141,7 @@ function viewData(user, name_pc,mark,model,processor,memory_ram,price,so,type,pl
             </thead>
 
               {results.map((e)=>(
-            <tbody>      
+            <tbody key={e.id}>      
                <tr>
                   <td>{e.user}</td>
                   <td>{e.name_pc}</td>
@@ -207,29 +207,29 @@ function viewData(user, name_pc,mark,model,processor,memory_ram,price,so,type,pl
 
                       >
                       <div className='container'>
-                        <div class="input-group mb-3">
-                          <input onChange={saveInputs} autoComplete='off' id='user_edit' type="text" class="form-control" placeholder="Usuario" aria-label="Usuario" />
-                          <input onChange={saveInputs} autoComplete='off' id='name_pc_edit' type="text" class="form-control" placeholder="Nombre PC" aria-label="Nombre PC" />
+                        <div className="input-group mb-3">
+                          <input onChange={saveInputs} autoComplete='off' id='user_edit' type="text" className="form-control" placeholder="Usuario" aria-label="Usuario" />
+                          <input onChange={saveInputs} autoComplete='off' id='name_pc_edit' type="text" className="form-control" placeholder="Nombre PC" aria-label="Nombre PC" />
                         </div>
-                        <div class="input-group mb-3">
-                          <input onChange={saveInputs} autoComplete='off' id='mark_edit' type="text" class="form-control" placeholder="Marca" aria-label="Marca" />
-                          <input onChange={saveInputs} autoComplete='off' id='model_edit' type="text" class="form-control" placeholder="Modelo" aria-label="Modelo" />
+                        <div className="input-group mb-3">
+                          <input onChange={saveInputs} autoComplete='off' id='mark_edit' type="text" className="form-control" placeholder="Marca" aria-label="Marca" />
+                          <input onChange={saveInputs} autoComplete='off' id='model_edit' type="text" className="form-control" placeholder="Modelo" aria-label="Modelo" />
                         </div>
-                        <div class="input-group mb-3">
-                          <input onChange={saveInputs} autoComplete='off' id='processor_edit' type="text" class="form-control" placeholder="Procesador" aria-label="Procesador" />
-                          <input onChange={saveInputs} autoComplete='off' id='memory_ram_edit' type="number" class="form-control" placeholder="RAM" aria-label="RAM" />
+                        <div className="input-group mb-3">
+                          <input onChange={saveInputs} autoComplete='off' id='processor_edit' type="text" className="form-control" placeholder="Procesador" aria-label="Procesador" />
+                          <input onChange={saveInputs} autoComplete='off' id='memory_ram_edit' type="number" className="form-control" placeholder="RAM" aria-label="RAM" />
                         </div>
-                        <div class="input-group mb-3">
-                          <input onChange={saveInputs} autoComplete='off' id='typeofdisk_edit' type="text" class="form-control" placeholder="Tipo de Disco" aria-label="Modelo" />
-                          <input onChange={saveInputs} autoComplete='off' id='price_edit' type="number" class="form-control" placeholder="Precio" aria-label="Precio" />
+                        <div className="input-group mb-3">
+                          <input onChange={saveInputs} autoComplete='off' id='typeofdisk_edit' type="text" className="form-control" placeholder="Tipo de Disco" aria-label="Modelo" />
+                          <input onChange={saveInputs} autoComplete='off' id='price_edit' type="number" className="form-control" placeholder="Precio" aria-label="Precio" />
                         </div>
-                        <div class="input-group mb-3">
-                          <input onChange={saveInputs} autoComplete='off'id='so_edit' type="text" class="form-control" placeholder="Sistema Operativo" aria-label="Sistema Operativo" />
-                          <input onChange={saveInputs} autoComplete='off' id='type_edit' type="text" class="form-control" placeholder="Tipo" aria-label="Tipo" />
+                        <div className="input-group mb-3">
+                          <input onChange={saveInputs} autoComplete='off'id='so_edit' type="text" className="form-control" placeholder="Sistema Operativo" aria-label="Sistema Operativo" />
+                          <input onChange={saveInputs} autoComplete='off' id='type_edit' type="text" className="form-control" placeholder="Tipo" aria-label="Tipo" />
                         </div>
-                        <div class="input-group mb-3">
-                          <input onChange={saveInputs} autoComplete='off' id='plant_edit' type="text" class="form-control" placeholder="Planta" aria-label="Planta" />
-                          <input onChange={saveInputs} autoComplete='off' id='section_edit' type="text" class="form-control" placeholder="Sector" aria-label="Sector" />
+                        <div className="input-group mb-3">
+                          <input onChange={saveInputs} autoComplete='off' id='plant_edit' type="text" className="form-control" placeholder="Planta" aria-label="Planta" />
+                          <input onChange={saveInputs} autoComplete='off' id='section_edit' type="text" className="form-control" placeholder="Sector" aria-label="Sector" />
                         </div>
                       </div>
                         </Modal>

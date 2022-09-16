@@ -1,4 +1,4 @@
-import { collection, getDocs, orderBy, query } from "firebase/firestore";
+import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
 import React from "react";
 import { useState, useEffect } from "react";
 import db from "../../services/firestore";
@@ -7,23 +7,26 @@ import Table from "../table/Table";
 import './Index.css'
 
 function Index() {
-    const [items, setItems] = useState([])
-    
-    
+
+  const [items, setItems] = useState([])
+
     useEffect(() => { 
       const collections = collection(db, "items");
       const q = query(collections, orderBy('user', 'asc'))  
+      const que = query(collections, where("plant","==","C"))
       
-       getDocs(q)
+       getDocs(que)
         .then((datos)=>{
             setItems(datos.docs.map((e)=>({id:e.id,...e.data()})))
         })       
     }, [items])
 
+
   return (
     <>
         <Header />
-        <Table items={items}/>
+        <Table items={items} />
+
     </>
   )
 }
