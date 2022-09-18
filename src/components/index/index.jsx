@@ -9,40 +9,55 @@ import './Index.css'
 
 function Index() {
 
+  
   const [items, setItems] = useState([])
-  const [select, setSelect] = useState()
+  const [selectPlant, setSelectPlant] = useState()
+  const [selectType, setSelectType] = useState()
 
   const collections = collection(db, "items");
   const q = query(collections, orderBy('user', 'asc'))  
   const plantA = query(collections, where("plant","==","A"))
   const plantB = query(collections, where("plant","==","B"))
   const plantC = query(collections, where("plant","==","C"))
+  const notebook = query(collections, where("type","==","Notebook"))
+  const torre = query(collections, where("type","==","Torre"))
 
 
     
-  const assignValue = ()=> {
-    setSelect(document.getElementById('select').value)
-    console.log(select)
+  const assignValuePlant = ()=> {
+    setSelectPlant(document.getElementById('selectPlant').value)
+    console.log(selectPlant)
 }
-  
+  const assignValueType = ()=> {
+    setSelectType(document.getElementById('selectType').value)
+    console.log(selectType)
+}
   useEffect(() => { 
 
 
       const query = ()=> {
-        if (select === 'A'){
+        if (selectPlant === 'A'){
           return plantA;
 
-        }else if(select === 'B'){
+        }else if(selectPlant === 'B'){
           return plantB;
         }
 
-        else if(select === 'C'){
+        else if(selectPlant === 'C'){
           return plantC;
+        }
+
+        else if(selectType === 'Notebook'){
+          return notebook;
+        }
+        else if(selectType === 'Torre'){
+          return torre;
         }
 
         else {
           return q;
         }
+
         
       }
       
@@ -56,7 +71,7 @@ function Index() {
   return (
     <>
         <Header />
-        <Dropdown assignValue={assignValue}/>
+        <Dropdown assignValuePlant={assignValuePlant} assignValueType={assignValueType}/>
         <Table items={items} />
 
     </>
