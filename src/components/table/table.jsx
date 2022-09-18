@@ -4,7 +4,7 @@ import {db} from '../../services/firestore'
 import './Table.css';
 import New from '../../common/Actions/New';
 import Swal from 'sweetalert2'
-import Modal from '../../common/Modal/Modal';
+import Modal from '../../common/modal/Modal';
 
 function Table({items}) { 
 
