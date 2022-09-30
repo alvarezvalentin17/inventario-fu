@@ -126,13 +126,13 @@ function viewData(user, name_pc,mark,model,processor,memory_ram,price,so,type,pl
         <table className="table mt-5">
             <thead>
                 <tr>
-                  <th scope="col">Usuario</th>
-                  <th scope="col">Nombre de PC</th>
+                  <th scope="col">Funcionario</th>
+                  <th scope="col">Nombre PC</th>
                   <th scope="col">Marca</th>
                   <th scope="col">Modelo</th>
                   <th scope="col">Procesador</th>
                   <th scope="col">RAM</th>
-                  <th scope="col">Sistema Operativo</th>
+                  <th scope="col">S.O</th>
                   <th scope="col">Tipo</th>
                   <th scope="col">Planta</th>
                   <th scope="col">Sector</th>
