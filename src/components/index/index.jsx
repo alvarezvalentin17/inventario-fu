@@ -15,7 +15,7 @@ function Index() {
   const [selectType, setSelectType] = useState()
 
   const collections = collection(db, "items");
-  // const q = query(collections, orderBy('user', 'asc'))  
+  const q = query(collections, orderBy('user', 'asc'))  
   const plantA = query(collections, where("plant","==","A"))
   const plantB = query(collections, where("plant","==","B"))
   const plantC = query(collections, where("plant","==","C"))
@@ -60,13 +60,13 @@ const querys = ()=> {
 
 }
 
-  const q = query(collection(db, "items"));
-  const unsubscribe = onSnapshot(querys(), (querySnapshot) => {
-    const cities = [];
+
+  const data = onSnapshot(querys(), (querySnapshot) => {
+    const computers = [];
     querySnapshot.forEach((doc) => {
-      cities.push({id:doc.id,...doc.data()});
+      computers.push({id:doc.id,...doc.data()});
+      setItems(computers)
     });
-    setItems(cities)
   });
 
 
