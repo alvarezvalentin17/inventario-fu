@@ -1,6 +1,6 @@
 import { collection, query, where, onSnapshot, orderBy } from "firebase/firestore";
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Dropdown from "../../common/Dropdown/Dropdown";
 import db from "../../services/firestore";
 import Header from "../header/Header";
@@ -33,9 +33,8 @@ function Index() {
     console.log(selectType)
 }
 
-const q = query(collection(db, "items"), orderBy('user', 'asc'));
-
 const querys = ()=> {
+
   if (selectPlant === 'A'){
     return plantA;
 
@@ -58,14 +57,16 @@ const querys = ()=> {
     return q;
   }
 
-  
+
 }
-  const data = onSnapshot(querys(), (querySnapshot) => {
-    const computers = [];
+
+  const q = query(collection(db, "items"));
+  const unsubscribe = onSnapshot(querys(), (querySnapshot) => {
+    const cities = [];
     querySnapshot.forEach((doc) => {
-      computers.push({id:doc.id,...doc.data()});
+      cities.push({id:doc.id,...doc.data()});
     });
-    setItems(computers)
+    setItems(cities)
   });
 
 
